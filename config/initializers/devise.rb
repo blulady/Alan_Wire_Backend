@@ -304,7 +304,7 @@ Devise.setup do |config|
   config.responder.error_status = :unprocessable_entity
   config.responder.redirect_status = :see_other
   config.jwt do |jwt|
-    jwt.secret = Rails.application.credentials.fetch(:secret_key_base)
+    jwt.secret = Rails.application.credentials.secret_key_base!
     jwt.dispatch_requests = [
       ['POST', %r{^/logout$}]
     ]
