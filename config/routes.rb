@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   resources :profiles do
     get 'departments', to: 'profiles#departments_index'
   end
+  get '/profiles/:id/positions', to: 'profiles#profile_positions_index'
   resources :departments 
   get '/departments/:id/profiles', to: 'departments#profiles_index'
   
   resources :positions
-  get '/positions/:id/profiles', to: 'positions#position_profiles_index'
+  get '/positions/:id/profiles', to: 'positions#positions_profiles_index'
 end

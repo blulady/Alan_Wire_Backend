@@ -53,6 +53,15 @@ class ProfilesController < ApplicationController
         # render json: profile_departments, status: :ok
     end
 
+    def profile_positions_index
+        profile = Profile.find(params[:id])
+        profile_positions = profile.positions
+        render json: {
+                data: { profile: PositionSerializer.new(profile_positions).serializable_hash[:data].map{|data| data[:attributes]}
+            }
+        }
+    end
+
     private
     def profile_params
         params.permit(:employee_number, :first_name, :last_name, :user_id)
