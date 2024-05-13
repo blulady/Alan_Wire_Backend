@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_27_034255) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_233924) do
+  create_table "departments", force: :cascade do |t|
+    t.string "department_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "departments_profiles", id: false, force: :cascade do |t|
+    t.integer "department_id", null: false
+    t.integer "profile_id", null: false
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "position_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "positions_profiles", id: false, force: :cascade do |t|
+    t.integer "position_id", null: false
+    t.integer "profile_id", null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer "employee_number"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_admin", default: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -26,4 +59,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_034255) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "profiles", "users"
 end
