@@ -62,6 +62,15 @@ class ProfilesController < ApplicationController
         }
     end
 
+    def profile_charts_index
+        profile = Profile.find(params[:id])
+        profile_charts = profile.charts
+        render json: {
+                data: { profile: ChartSerializer.new(profile_charts).serializable_hash[:data].map{|data| data[:attributes]}
+            }
+        }
+    end
+
     private
     def profile_params
         params.permit(:employee_number, :first_name, :last_name, :user_id)
