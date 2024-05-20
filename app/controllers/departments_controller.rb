@@ -56,6 +56,15 @@ class DepartmentsController < ApplicationController
         }
         
     end
+    
+    def charts_index
+        department = Department.find(params[:id])
+        department_charts = department.charts
+        render json: {
+                data: { profile: ChartSerializer.new(department_charts).serializable_hash[:data].map{|data| data[:attributes]}
+            }
+        }
+    end
 
     private 
     def department_params
