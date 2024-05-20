@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_13_214355) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_20_180621) do
   create_table "charts", force: :cascade do |t|
     t.string "chart_title", null: false
     t.text "chart_data", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "charts_departments", id: false, force: :cascade do |t|
+    t.integer "chart_id", null: false
+    t.integer "department_id", null: false
+    t.index ["chart_id", "department_id"], name: "index_charts_departments_on_chart_id_and_department_id"
+    t.index ["department_id", "chart_id"], name: "index_charts_departments_on_department_id_and_chart_id"
   end
 
   create_table "charts_profiles", id: false, force: :cascade do |t|
