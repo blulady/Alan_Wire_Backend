@@ -34,7 +34,7 @@ admin_profile = Profile.find_by(employee_number: 12345)
 reg_profile = Profile.find_by(employee_number: 12346)
 
 Chart.destroy_all
-Chart.create(chart_title: "Bobble Futures", chart_data: '{
+Chart.create(chart_title: "Futures", chart_data: '{
     "type": "line",
     "data": {
       "labels": ["R", "O", "Y", "G", "B", "I", "V"],
@@ -48,10 +48,75 @@ Chart.create(chart_title: "Bobble Futures", chart_data: '{
     }
   }')
 
+Chart.create(chart_title: "Wire Output", chart_data: '{
+  "type": "line",
+  "data": {
+    "labels": ["January", "February", "March", "April", "May", "June", "July"],
+    "datasets": [{
+      "label": "Wire (1000 ft.)",
+      "data": [12, 35, 75, 81, 55, 67, 99],
+      "fill": false,
+      "borderColor": "rgb(255, 0, 0)",
+      "tension": 0.1
+    }]
+  }
+}')
+
+Chart.create(chart_title: "Sales Projections", chart_data: '{
+      "type": "bar",
+      "data": {
+        "labels": ["July", "August", "September", "October", "November", "December", "January"],
+        "datasets": [{
+          "label": "Monthly Sales",
+          "data": [65, 59, 80, 81, 56, 55, 40],
+          "backgroundColor": "red",
+          "borderColor": "red",
+          "borderWidth": 1
+        }]
+      },
+      "options": {
+        "scales": {
+          "y": {
+            "beginAtZero": true
+          }
+        }
+      }
+    }')
+
+Chart.create(chart_title: "Down Time by Machine", chart_data: "{
+  type: 'pie',
+  data: {
+      labels: ['Machine 1', 'Machine 2', 'Machine 3'],
+      datasets: [{
+          data: [300, 50, 100],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+      }]
+  },
+  options: {
+      responsive: true,
+      plugins: {
+          legend: {
+              position: 'top',
+          }
+      }
+  }
+}")
+
 
 admin_profile.departments << Department.find_by(department_name: "Engineering")
-admin_profile.charts << Chart.find_by(chart_title: "Bobble Futures")
+admin_profile.charts << Chart.find_by(chart_title: "Futures")
 admin_profile.positions << Position.find_by(position_title: "Back Office")
 reg_profile.departments << Department.find_by(department_name: "Engineering")
-reg_profile.charts << Chart.find_by(chart_title: "Bobble Futures")
+reg_profile.departments << Department.find_by(department_name: "Extrusion")
+reg_profile.departments << Department.find_by(department_name: "Sales")
+reg_profile.charts << Chart.find_by(chart_title: "Futures")
 reg_profile.positions << Position.find_by(position_title: "Electrical Customer Service")
+engineering_dept = Department.find_by(department_name: "Engineering")
+extrusion_dept = Department.find_by(department_name: "Extrusion")
+sales_dept = Department.find_by(department_name: "Sales")
+engineering_dept.charts << Chart.find_by(chart_title: "Down Time by Machine")
+engineering_dept.charts << Chart.find_by(chart_title: "Futures")
+extrusion_dept.charts << Chart.find_by(chart_title: "Wire Output")
+sales_dept.charts << Chart.find_by(chart_title: "Sales Projections")
+
