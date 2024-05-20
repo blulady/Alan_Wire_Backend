@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   
   resources :departments 
   get '/departments/:id/profiles', to: 'departments#profiles_index'
+  get '/departments/:id/charts', to: 'departments#charts_index'
   
   resources :positions
   get '/positions/:id/profiles', to: 'positions#positions_profiles_index'
