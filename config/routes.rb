@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post '/profiles/:id/departments/:department_id', to: 'profiles#add_department'
   post '/profiles/:id/positions/:position_id', to: 'profiles#add_position'
   get '/profiles/name/:name', to: 'profiles#find_by_name'
+  get '/profiles/user_id/:user_id', to: 'profiles#find_by_user_id'
   # post '/profiles/:id/charts/:chart_id', to: 'profiles#add_chart' not tested
   
   resources :departments 
