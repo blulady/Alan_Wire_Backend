@@ -21,6 +21,15 @@ class ProfilesController < ApplicationController
         }
     end
 
+    def find_by_user_id
+        profile = Profile.find_by(user_id: params[:user_id])
+
+        render json: {
+            data: { profile: ProfileSerializer.new(profile).serializable_hash[:data][:attributes]}
+        }
+
+    end
+
     def create
         profile = Profile.new(profile_params)
         if profile.save
@@ -93,6 +102,7 @@ class ProfilesController < ApplicationController
             render json: { message: 'Position added to profile successfully' }, status: :ok
         end
     end
+    
 
     def profile_charts_index
         profile = Profile.find(params[:id])
