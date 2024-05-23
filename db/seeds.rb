@@ -84,25 +84,25 @@ Chart.create(chart_title: "Sales Projections", chart_data: '{
     }')
     
 
-Chart.create(chart_title: "Down Time by Machine", chart_data: "{
-  'type': 'pie',
-  'data': {
-      'labels': ['Machine 1', 'Machine 2', 'Machine 3'],
-      'datasets': [{
-          'data': [300, 50, 100],
-          'backgroundColor': ['#FF6384', '#36A2EB', '#FFCE56'],
-          'hoverBackgroundColor': ['#FF6384', '#36A2EB', '#FFCE56']
+Chart.create(chart_title: "Down Time by Machine", chart_data: '{
+  "type": "pie",
+  "data": {
+      "labels": ["Machine 1", "Machine 2", "Machine 3"],
+      "datasets": [{
+          "data": [300, 50, 100],
+          "backgroundColor": ["#FF6384", "#36A2EB", "#FFCE56"],
+          "hoverBackgroundColor": ["#FF6384", "#36A2EB", "#FFCE56"]
       }]
   },
-  'options': {
-      'responsive': true,
-     ' plugins': {
-          'legend': {
-              'position': 'top',
+  "options": {
+      "responsive": true,
+      "plugins": {
+          "legend": {
+              "position": "top"
           }
       }
   }
-}")
+}')
 
 
 admin_profile.departments << Department.find_by(department_name: "Engineering")
