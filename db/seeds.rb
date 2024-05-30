@@ -37,26 +37,26 @@ Chart.destroy_all
 Chart.create(chart_title: "Futures", chart_data: '{
     "type": "line",
     "data": {
-      "labels": ["R", "O", "Y", "G", "B", "I", "V"],
+      "labels": ["January", "February", "March", "April", "May", "June", "July"],
       "datasets": [{
-        "label": "An Example Data",
+        "label": "Price",
         "data": [12, 35, 75, 81, 55, 67, 99],
         "fill": false,
-        "borderColor": "rgb(255, 0, 0)",
+        "borderColor": "#36A2EB",
         "tension": 0.1
       }]
     }
   }')
 
-Chart.create(chart_title: "Wire Output", chart_data: '{
+Chart.create(chart_title: "Monthly Wire Output", chart_data: '{
   "type": "line",
   "data": {
     "labels": ["January", "February", "March", "April", "May", "June", "July"],
     "datasets": [{
       "label": "Wire (1000 ft.)",
-      "data": [12, 35, 75, 81, 55, 67, 99],
+      "data": [1200, 3500, 7500, 8100, 5500, 6700, 9900],
       "fill": false,
-      "borderColor": "rgb(255, 0, 0)",
+      "borderColor": "#FFCE56",
       "tension": 0.1
     }]
   }
@@ -69,8 +69,8 @@ Chart.create(chart_title: "Sales Projections", chart_data: '{
         "datasets": [{
           "label": "Monthly Sales",
           "data": [65, 59, 80, 81, 56, 55, 40],
-          "backgroundColor": "red",
-          "borderColor": "red",
+          "backgroundColor": "#FF6384",
+          "borderColor": "#FF6384",
           "borderWidth": 1
         }]
       },
@@ -84,7 +84,28 @@ Chart.create(chart_title: "Sales Projections", chart_data: '{
     }')
     
 
-Chart.create(chart_title: "Down Time by Machine", chart_data: '{
+Chart.create(chart_title: "Machine Down Time", chart_data: '{
+  "type": "bar",
+  "data": {
+      "labels": ["Machine 1", "Machine 2", "Machine 3"],
+      "datasets": [{
+          "label": "Hours",
+          "data": [15, 200, 75],
+          "backgroundColor": ["#FF6384", "#36A2EB", "#FFCE56"],
+          "hoverBackgroundColor": ["#FF6384", "#36A2EB", "#FFCE56"]
+      }]
+  },
+  "options": {
+      "responsive": true,
+      "plugins": {
+          "legend": {
+              "position": "top"
+          }
+      }
+  }
+}')
+
+Chart.create(chart_title: "Production", chart_data: '{
   "type": "pie",
   "data": {
       "labels": ["Machine 1", "Machine 2", "Machine 3"],
@@ -104,20 +125,27 @@ Chart.create(chart_title: "Down Time by Machine", chart_data: '{
   }
 }')
 
-
+# ADMIN
 admin_profile.departments << Department.find_by(department_name: "Engineering")
+admin_profile.departments << Department.find_by(department_name: "Sales")
+admin_profile.departments << Department.find_by(department_name: "Extrusion")
 admin_profile.charts << Chart.find_by(chart_title: "Futures")
 admin_profile.positions << Position.find_by(position_title: "Back Office")
+
+# USER
 reg_profile.departments << Department.find_by(department_name: "Engineering")
 reg_profile.departments << Department.find_by(department_name: "Extrusion")
 reg_profile.departments << Department.find_by(department_name: "Sales")
 reg_profile.charts << Chart.find_by(chart_title: "Futures")
 reg_profile.positions << Position.find_by(position_title: "Electrical Customer Service")
+
+# DEPARTMENTS
 engineering_dept = Department.find_by(department_name: "Engineering")
 extrusion_dept = Department.find_by(department_name: "Extrusion")
 sales_dept = Department.find_by(department_name: "Sales")
-engineering_dept.charts << Chart.find_by(chart_title: "Down Time by Machine")
+engineering_dept.charts << Chart.find_by(chart_title: "Machine Down Time")
 engineering_dept.charts << Chart.find_by(chart_title: "Futures")
-extrusion_dept.charts << Chart.find_by(chart_title: "Wire Output")
+extrusion_dept.charts << Chart.find_by(chart_title: "Monthly Wire Output")
+extrusion_dept.charts << Chart.find_by(chart_title: "Production")
 sales_dept.charts << Chart.find_by(chart_title: "Sales Projections")
 
